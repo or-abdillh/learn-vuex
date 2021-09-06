@@ -35,10 +35,11 @@
          font-weight: bold;
          border-radius: 8px;
          border: 1.5px solid gray;
+         transition: .3s ease;
          
          &:active, &:hover {
             border-color: salmon;
-            box-shadow: 1px 1px 2px gray;
+            letter-spacing: 2px;
          }
       }
    }

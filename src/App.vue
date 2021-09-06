@@ -1,5 +1,5 @@
 <template>
-   <ul>
+   <ul v-if="$route.fullPath != '/login'" >
       <li>
          <router-link to="/" >Home</router-link>
       </li>
@@ -10,7 +10,8 @@
          <router-link to="/post" >Post</router-link>
       </li>
    </ul>
-   <router-view></router-view>
+   <router-view>
+   </router-view>
 </template>
 
 
