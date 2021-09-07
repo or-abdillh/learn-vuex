@@ -4,12 +4,17 @@
       <input v-model="userName" type="text" placeholder="Username" />
       <input type="password" placeholder="password" />
       <button ref="btnLogin" :disabled="userName == ''" @click="login" type="button">Submit</button>
+      <small ref="textMsgAuth" ></small>
    </div>
+   <pre>
+      {{ router.currentRoute.path }}
+   </pre>
 </template>
 <script>
-   import { ref } from 'vue'
-   import { router } from '../router/'
-   import { store } from '../store'
+   import { ref, onMounted } from 'vue'
+   import { useRouter } from 'vue-router'
+   import { useStore } from 'vuex'
+   import axios from 'axios'
    
    export default {
       name: 'Login',
@@ -17,17 +22,22 @@
          
          const userName = ref('')
          const btnLogin = ref(null)
+         const textMsgAuth = ref(null)
+         const store = useStore()
+         const router = useRouter()
          
          const login = () => {
             btnLogin.value.innerHTML = 'Loading, please wait'
-            localStorage.setItem('isAuth', true)
+            localStorage.setItem('isAuth', 'true')
             store.commit('setUserName', userName.value)
+            store.commit('setAuthErrMsg', '')
             
             setTimeout(() => {
-               router.push({name: 'Home'})
+               router.push({ name: 'Home' })
             }, 1500)
          }
-         return { userName, btnLogin, login, store }
+         
+         return { userName, btnLogin, login, textMsgAuth, router }
       }
    }
    
@@ -40,11 +50,13 @@
       margin: 2rem auto 0;
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
       
       h3 {
-         text-align: center;
          font-size: 1.5rem;
+         display: block;
+         width: 100%;
+         text-align: center;
+         margin-bottom: 1rem;
       }
       
       input {
@@ -71,6 +83,12 @@
          border-radius: 8px;
          border: 1.5px solid gray;
          margin-bottom: .55rem;
+      }
+      
+      small {
+         color: #cf1e1e;
+         font-weight: bold;
+         letter-spacing: .5px;
       }
    }
    

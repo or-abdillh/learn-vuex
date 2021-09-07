@@ -36,12 +36,9 @@
       text-align: center;
       margin: 4rem auto 0;
       background: whitesmoke;
-      padding: .75rem;
+      padding: 1rem .75rem;
       border-radius: 12px;
       
-      h2, p {
-         line-height: 50%;
-      }
       
       button {
          width: 55%;

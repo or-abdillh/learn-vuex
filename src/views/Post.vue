@@ -21,8 +21,13 @@
       text-align: center;
       margin: 4rem auto 0;
       background: whitesmoke;
-      padding: .75rem;
+      padding: 1rem;
+      box-sizing: border-box;
       border-radius: 12px;
+      
+      h3, p {
+         margin-bottom: 1rem;
+      }
       
       p {
          text-align: left;
