@@ -4,7 +4,6 @@
       <input v-model="userName" type="text" placeholder="Username" />
       <input type="password" placeholder="password" />
       <button ref="btnLogin" :disabled="userName == ''" @click="login" type="button">Submit</button>
-      <small ref="textMsgAuth" ></small>
    </div>
    <pre>
       {{ router.currentRoute.path }}
@@ -28,16 +27,19 @@
          
          const login = () => {
             btnLogin.value.innerHTML = 'Loading, please wait'
+            //save information about authentication into localStorage
             localStorage.setItem('isAuth', 'true')
+            //State mutations
             store.commit('setUserName', userName.value)
-            store.commit('setAuthErrMsg', '')
-            
+            //State Actions
+            store.dispatch('getUserData')
+            //Router push to Home view
             setTimeout(() => {
                router.push({ name: 'Home' })
             }, 1500)
          }
          
-         return { userName, btnLogin, login, textMsgAuth, router }
+         return { userName, btnLogin, login, router }
       }
    }
    
