@@ -5,19 +5,21 @@
       <input type="password" placeholder="password" />
       <button ref="btnLogin" :disabled="userName == ''" @click="login" type="button">Submit</button>
    </div>
-   <pre>
-      {{ router.currentRoute.path }}
-   </pre>
 </template>
 <script>
    import { ref, onMounted } from 'vue'
    import { useRouter } from 'vue-router'
-   import { useStore } from 'vuex'
-   import axios from 'axios'
+   import { useStore, mapActions } from 'vuex'
    
    export default {
       name: 'Login',
       setup() {
+         
+         onMounted(() => {
+            if ( localStorage.getItem('isAuth') ) {
+               localStorage.removeItem('isAuth')
+            }
+         })
          
          const userName = ref('')
          const btnLogin = ref(null)

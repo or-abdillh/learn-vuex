@@ -8,7 +8,10 @@
             <router-link to="/about" >About</router-link>
          </li>
          <li>
-            <router-link to="/post" >Post</router-link>
+            <router-link to="/posts" >Posts</router-link>
+         </li>
+         <li>
+            <router-link to="/login" >Logout</router-link>
          </li>
       </ul>
       <button @click="isSlide = !isSlide" type="button">

@@ -5,9 +5,10 @@
       <button @click="logout" type="button">Log out</button>
    </div>
    <div class="user-wrapper">
-      <img :src="userDetails.picture.large" />
-      <strong>{{ userDetails.name.title }} {{ userDetails.name.first }} {{ userDetails.name.last }}</strong>
-      <small>{{ userDetails.location.city }} - {{ userDetails.location.country }}</small>
+      <img :src="userDetails[0].picture.large" />
+      <strong>{{ userDetails[0].name.title }} {{ userDetails[0].name.first }} {{ userDetails[0].name.last }}</strong>
+      <small>{{ userDetails[0].location.city }} - {{ userDetails[0].location.country }}</small>
+      <small>Liked post : {{ likes }}</small>
    </div>
 </template>
 
@@ -15,7 +16,7 @@
    
    import { ref, computed } from 'vue'
    import { router } from '../router'
-   import { store } from '../store'
+   import { mapGetters } from 'vuex'
    
    export default {
       name: 'Home',
@@ -28,15 +29,14 @@
             }, 500);
          }
          
-         const username = computed(() => {
-            return store.state.username
+         return { logout }
+      },
+      computed: {
+         ...mapGetters({
+            username: 'getUserName',
+            userDetails: 'getUserDetails',
+            likes: 'getTotalLikes'
          })
-         
-         const userDetails = computed(() => {
-            return store.state.userDetails[0]
-         })
-         
-         return { logout, username, userDetails }
       }
    }
    
@@ -75,7 +75,7 @@
    
    .user-wrapper {
       width: 80%;
-      margin: .55rem auto 0;
+      margin: .55rem auto 2rem;
       background: whitesmoke;
       padding: 1rem .75rem;
       border-radius: 12px;

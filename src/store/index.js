@@ -4,16 +4,27 @@ export const store = createStore({
    state() {
       return {
          username: '',
-         authErrMsg: '',
+         likes: 0,
          userDetails: {}
       }
+   },
+   getters: {
+     getUserName(state) {
+        return state.username
+     },
+     getUserDetails(state) {
+        return state.userDetails
+     },
+     getTotalLikes(state) {
+        return state.likes
+     }
    },
    mutations: {
       setUserName(state, value) {
          state.username = value
       },
-      setAuthErrMsg(state, msg) {
-         state.authErrMsg = msg
+      setLikes(state) {
+         state.likes++
       },
       setUserDetails(state, data) {
          state.userDetails = data
